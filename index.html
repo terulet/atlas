@@ -4,9 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Atlas — El sistema operativo inteligente de tu empresa</title>
-<meta name="description" content="Atlas convierte el caos de una empresa en trabajo organizado, medible y accionable. Inbox, casos, documentos, facturas, reservas, CRM, tareas e inteligencia en una sola capa.">
+<meta name="description" content="Atlas convierte el caos de una empresa en trabajo organizado, medible y accionable.">
 
-<!-- Open Graph (previsualización WhatsApp / redes) -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="Atlas — El sistema operativo inteligente de tu empresa">
 <meta property="og:description" content="Atlas convierte el caos de una empresa en trabajo organizado, medible y accionable.">
@@ -41,10 +40,14 @@ body{
 .title{margin:18px 0 8px;font-size:clamp(24px,5vw,32px);font-weight:700;line-height:1.18;letter-spacing:-.01em}
 .lead{margin:0 auto;max-width:460px;font-size:15.5px;color:var(--muted);line-height:1.55}
 
-.flow{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin:0 auto 30px}
+.flow{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin:0 auto 22px}
 .pill{font-size:13px;font-weight:600;padding:8px 16px;border-radius:999px;background:var(--card-2)}
 .pill--chaos{color:#f0997b}.pill--atlas{color:var(--accent)}.pill--order{color:#97c459}
 .arrow{color:var(--muted);font-size:18px}
+
+.hint{text-align:center;font-size:12.5px;color:var(--muted);margin:0 auto 26px;display:flex;align-items:center;justify-content:center;gap:7px}
+.hint .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
 
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:18px}
 .mod{cursor:pointer;text-align:left;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:15px 16px;display:flex;flex-direction:column;gap:9px;transition:transform .15s ease,border-color .15s ease,background .15s ease;font-family:inherit;color:inherit}
@@ -55,19 +58,25 @@ body{
 .mod__name{font-size:14.5px;font-weight:600}
 .mod__sub{font-size:12px;color:var(--muted);line-height:1.4}
 
-.detail{display:flex;align-items:center;gap:18px;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px 24px;min-height:104px;transition:border-color .2s ease}
-.detail__icon{flex-shrink:0;width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:28px}
-.detail__title{font-size:18px;font-weight:700;margin-bottom:4px}
-.detail__desc{font-size:14.5px;color:var(--muted);line-height:1.5}
+.detail{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px 24px;transition:border-color .2s ease}
+.detail__head{display:flex;align-items:center;gap:16px;margin-bottom:16px}
+.detail__icon{flex-shrink:0;width:54px;height:54px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:27px}
+.detail__title{font-size:18px;font-weight:700;margin-bottom:3px}
+.detail__what{font-size:13.5px;color:var(--muted);line-height:1.45}
+.detail__body{font-size:15px;line-height:1.6;color:var(--text);margin-bottom:16px}
+.detail__ex{display:flex;gap:11px;align-items:flex-start;background:var(--card-2);border-radius:12px;padding:13px 15px}
+.detail__ex .tag{flex-shrink:0;font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--accent);padding-top:2px}
+.detail__ex .txt{font-size:13.5px;color:var(--muted);line-height:1.55}
+.detail__ex .txt b{color:var(--text);font-weight:600}
 
 .foot{text-align:center;margin-top:48px}
 .quote{font-family:'Fraunces',Georgia,serif;font-style:italic;font-size:clamp(19px,3.4vw,24px);line-height:1.42;font-weight:500;max-width:620px;margin:0 auto;color:#fff}
 .divider{display:block;width:44px;height:2px;background:var(--gold);margin:24px auto;opacity:.75}
-.tag{font-size:14.5px;color:var(--muted);max-width:500px;margin:0 auto;line-height:1.55}
-.tag strong{color:var(--accent);font-weight:600}
+.tagline{font-size:14.5px;color:var(--muted);max-width:500px;margin:0 auto;line-height:1.55}
+.tagline strong{color:var(--accent);font-weight:600}
 
-@media(prefers-reduced-motion:reduce){*{transition:none!important}}
-@media(max-width:520px){.universe{padding:48px 16px 60px}.detail{flex-direction:column;text-align:center;align-items:center}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}.hint .dot{animation:none}}
+@media(max-width:520px){.universe{padding:48px 16px 60px}.detail__head{flex-direction:column;text-align:center}}
 </style>
 </head>
 <body>
@@ -89,20 +98,29 @@ body{
       <span class="pill pill--order">Orden</span>
     </div>
 
+    <p class="hint"><span class="dot"></span> Toca cada módulo para ver qué hace y un ejemplo real</p>
+
     <div class="grid" id="grid"></div>
 
     <div class="detail" id="detail">
-      <div class="detail__icon" id="detailIcon" aria-hidden="true"></div>
-      <div>
-        <div class="detail__title" id="detailTitle"></div>
-        <div class="detail__desc" id="detailDesc"></div>
+      <div class="detail__head">
+        <div class="detail__icon" id="detailIcon" aria-hidden="true"></div>
+        <div>
+          <div class="detail__title" id="detailTitle"></div>
+          <div class="detail__what" id="detailWhat"></div>
+        </div>
+      </div>
+      <p class="detail__body" id="detailBody"></p>
+      <div class="detail__ex">
+        <span class="tag">Ejemplo</span>
+        <span class="txt" id="detailEx"></span>
       </div>
     </div>
 
     <footer class="foot">
       <p class="quote">"Atlas convierte el caos de una empresa en trabajo organizado, medible y accionable."</p>
       <span class="divider"></span>
-      <p class="tag">Atlas no es una herramienta. Es la <strong>capa inteligente</strong> que conecta todo lo que pasa en un negocio.</p>
+      <p class="tagline">Atlas no es una herramienta. Es la <strong>capa inteligente</strong> que conecta todo lo que pasa en un negocio.</p>
     </footer>
 
   </div>
@@ -111,20 +129,49 @@ body{
 <script>
 (function(){
   var W=[
-    {id:'inbox',n:'Inbox',i:'📥',t:'#0e3a3a',c:'#5dcaa5',s:'Toda la entrada, un solo sitio',d:'Mensajes, emails y WhatsApps. Todo el caos de entrada centralizado y bajo control.'},
-    {id:'cases',n:'Cases',i:'🗂️',t:'#26215c',c:'#afa9ec',s:'De información a acción',d:'Convierte la información dispersa en casos listos para trabajar, con contexto y siguiente paso.'},
-    {id:'docs',n:'Docs',i:'📄',t:'#04342c',c:'#5dcaa5',s:'Documentos siempre a mano',d:'Contratos, DNI, permisos y archivos. Organizados, vinculados y encontrables al instante.'},
-    {id:'facturas',n:'Facturas',i:'🧾',t:'#412402',c:'#ef9f27',s:'Pagos sin sorpresas',d:'Facturas, pagos, proveedores e incidencias. El dinero del negocio, ordenado y trazable.'},
-    {id:'booking',n:'Booking',i:'📅',t:'#4a1b0c',c:'#f0997b',s:'Reservas bajo control',d:'Booking, Airbnb, web directa, check-in, limpieza y huéspedes. Todos los canales, una vista.'},
-    {id:'crm',n:'CRM',i:'👥',t:'#4b1528',c:'#ed93b1',s:'Cada cliente, su historia',d:'Clientes, historial, oportunidades y seguimiento. Relaciones que no se pierden.'},
-    {id:'tasks',n:'Tasks',i:'✅',t:'#173404',c:'#97c459',s:'Quién, qué y cuándo',d:'Tareas, responsables, vencimientos y prioridades. El trabajo siempre claro y asignado.'},
-    {id:'intelligence',n:'Intelligence',i:'💡',t:'#501313',c:'#f09595',s:'Ve lo que se te escapa',d:'Detecta urgencias, faltantes, riesgos y siguientes pasos. La capa que anticipa.'},
-    {id:'dashboard',n:'Dashboard',i:'📊',t:'#2c2c2a',c:'#b4b2a9',s:'Tu negocio de un vistazo',d:'Visión global del negocio. Todo lo que importa, medible y en una sola pantalla.'}
+    {id:'inbox',n:'Inbox',i:'📥',t:'#0e3a3a',c:'#5dcaa5',
+      w:'Toda la entrada, en un solo sitio',
+      d:'Recoge mensajes, emails y WhatsApps de todos los canales y los reúne en una sola bandeja. Se acabó saltar de app en app buscando dónde te escribieron.',
+      e:'Un cliente te escribe por <b>WhatsApp</b> y otro por <b>email</b>: los dos aparecen juntos en la misma pantalla, sin perder ninguno.'},
+    {id:'cases',n:'Cases',i:'🗂️',t:'#26215c',c:'#afa9ec',
+      w:'De información suelta a algo que trabajar',
+      d:'Convierte cada conversación o petición en un “caso” con todo su contexto: quién, qué pide, qué falta y cuál es el siguiente paso.',
+      e:'Una solicitud de presupuesto se convierte en un <b>caso abierto</b> con su historial, listo para gestionar de principio a fin.'},
+    {id:'docs',n:'Docs',i:'📄',t:'#04342c',c:'#5dcaa5',
+      w:'Documentos siempre a mano',
+      d:'Guarda y organiza contratos, DNI, permisos y archivos, vinculados a su cliente o caso. Encuentras cualquier papel en segundos.',
+      e:'Necesitas el <b>DNI de un cliente</b>: en vez de rebuscar en el móvil, está adjunto a su ficha y lo abres al instante.'},
+    {id:'facturas',n:'Facturas',i:'🧾',t:'#412402',c:'#ef9f27',
+      w:'El dinero, ordenado y trazable',
+      d:'Centraliza facturas, pagos, proveedores e incidencias. Sabes qué está cobrado, qué está pendiente y qué hay que reclamar.',
+      e:'Una <b>factura sin pagar</b> deja de perderse: Atlas la marca como pendiente y te avisa antes de que se te olvide.'},
+    {id:'booking',n:'Reservas',i:'📅',t:'#4a1b0c',c:'#f0997b',
+      w:'Todos los canales de reserva, una vista',
+      d:'Unifica Booking, Airbnb y la web directa, junto con check-in, limpieza y huéspedes. Toda la operativa del alojamiento en un mismo sitio.',
+      e:'Llega una reserva de <b>Airbnb</b> y otra de <b>Booking</b>: las ves juntas, con su limpieza y check-in ya organizados.'},
+    {id:'crm',n:'Clientes',i:'👥',t:'#4b1528',c:'#ed93b1',
+      w:'Cada cliente, con toda su historia',
+      d:'Guarda clientes, historial, oportunidades y seguimiento. Sabes con quién hablas y qué pasó antes sin tener que acordarte de memoria.',
+      e:'Te llama un cliente de hace meses y ves <b>todo lo que hicisteis</b>: presupuestos, mensajes y notas, al momento.'},
+    {id:'tasks',n:'Tareas',i:'✅',t:'#173404',c:'#97c459',
+      w:'Quién hace qué, y para cuándo',
+      d:'Tareas con responsable, fecha de vencimiento y prioridad. El trabajo siempre está claro, asignado y nada se queda en el aire.',
+      e:'“Enviar contrato antes del viernes” queda como <b>tarea con responsable y fecha</b>, no como un recordatorio mental que se olvida.'},
+    {id:'intelligence',n:'Inteligencia',i:'💡',t:'#501313',c:'#f09595',
+      w:'Ve lo que se te escapa',
+      d:'Detecta urgencias, datos que faltan, riesgos y el siguiente paso lógico. Es la capa que se adelanta y te avisa antes de que sea un problema.',
+      e:'Un caso lleva <b>3 días sin respuesta</b> o falta un documento: Atlas lo detecta y te lo señala automáticamente.'},
+    {id:'dashboard',n:'Visión global',i:'📊',t:'#2c2c2a',c:'#b4b2a9',
+      w:'Tu negocio de un vistazo',
+      d:'Reúne todo lo que importa en una sola pantalla: qué hay abierto, qué corre prisa y cómo va el negocio. Control total sin abrir mil pantallas.',
+      e:'En un solo vistazo ves <b>casos abiertos, pagos pendientes y urgencias</b> del día, sin entrar módulo por módulo.'}
   ];
   var grid=document.getElementById('grid'),
       di=document.getElementById('detailIcon'),
       dt=document.getElementById('detailTitle'),
-      dd=document.getElementById('detailDesc'),
+      dw=document.getElementById('detailWhat'),
+      dbody=document.getElementById('detailBody'),
+      dex=document.getElementById('detailEx'),
       db=document.getElementById('detail'),
       active='inbox';
   function render(){
@@ -136,7 +183,7 @@ body{
       b.setAttribute('aria-label','Atlas '+w.n);
       b.style.background=on?w.t:'';
       b.style.borderColor=on?w.c:'';
-      b.innerHTML='<div class="mod__top"><span class="mod__ico" style="background:'+w.t+'">'+w.i+'</span><span class="mod__name" style="color:'+(on?w.c:'')+'">'+w.n+'</span></div><span class="mod__sub">'+w.s+'</span>';
+      b.innerHTML='<div class="mod__top"><span class="mod__ico" style="background:'+w.t+'">'+w.i+'</span><span class="mod__name" style="color:'+(on?w.c:'')+'">'+w.n+'</span></div><span class="mod__sub">'+w.w+'</span>';
       b.onmouseenter=function(){if(w.id!==active)select(w.id);};
       b.onclick=function(){select(w.id);};
       grid.appendChild(b);
@@ -147,7 +194,10 @@ body{
     var w=W.filter(function(x){return x.id===id;})[0];
     di.style.background=w.t;di.textContent=w.i;
     dt.textContent='Atlas '+w.n;dt.style.color=w.c;
-    dd.textContent=w.d;db.style.borderColor=w.c;
+    dw.textContent=w.w;
+    dbody.textContent=w.d;
+    dex.innerHTML=w.e;
+    db.style.borderColor=w.c;
   }
   render();select('inbox');
 })();
