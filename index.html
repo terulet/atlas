@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atlas — El sistema operativo inteligente de tu empresa</title>
+<meta name="description" content="Atlas convierte el caos de una empresa en trabajo organizado, medible y accionable. Inbox, casos, documentos, facturas, reservas, CRM, tareas e inteligencia en una sola capa.">
+
+<!-- Open Graph (previsualización WhatsApp / redes) -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Atlas — El sistema operativo inteligente de tu empresa">
+<meta property="og:description" content="Atlas convierte el caos de una empresa en trabajo organizado, medible y accionable.">
+<meta property="og:image" content="https://terulet.github.io/atlas/atlas-og.png">
+<meta property="og:url" content="https://terulet.github.io/atlas/">
+<meta property="og:site_name" content="Atlas">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0e1117">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@1,9..144,500&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#0e1117; --card:#161b22; --card-2:#1c222c;
+  --border:rgba(255,255,255,.08); --text:#e9edf2; --muted:#9aa4b2;
+  --accent:#2dd4bf; --gold:#d4af37;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  background:var(--bg); color:var(--text);
+  -webkit-font-smoothing:antialiased; line-height:1.5;
+}
+.universe{padding:64px 20px 80px}
+.inner{max-width:920px;margin:0 auto}
+
+.head{text-align:center;margin-bottom:34px}
+.badge{display:inline-flex;align-items:center;gap:6px;background:rgba(45,212,191,.12);color:var(--accent);font-size:12.5px;font-weight:600;letter-spacing:.03em;padding:6px 14px;border-radius:999px}
+.title{margin:18px 0 8px;font-size:clamp(24px,5vw,32px);font-weight:700;line-height:1.18;letter-spacing:-.01em}
+.lead{margin:0 auto;max-width:460px;font-size:15.5px;color:var(--muted);line-height:1.55}
+
+.flow{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin:0 auto 30px}
+.pill{font-size:13px;font-weight:600;padding:8px 16px;border-radius:999px;background:var(--card-2)}
+.pill--chaos{color:#f0997b}.pill--atlas{color:var(--accent)}.pill--order{color:#97c459}
+.arrow{color:var(--muted);font-size:18px}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:18px}
+.mod{cursor:pointer;text-align:left;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:15px 16px;display:flex;flex-direction:column;gap:9px;transition:transform .15s ease,border-color .15s ease,background .15s ease;font-family:inherit;color:inherit}
+.mod:hover,.mod.is-active{transform:translateY(-2px)}
+.mod:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.mod__top{display:flex;align-items:center;gap:11px}
+.mod__ico{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.mod__name{font-size:14.5px;font-weight:600}
+.mod__sub{font-size:12px;color:var(--muted);line-height:1.4}
+
+.detail{display:flex;align-items:center;gap:18px;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px 24px;min-height:104px;transition:border-color .2s ease}
+.detail__icon{flex-shrink:0;width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:28px}
+.detail__title{font-size:18px;font-weight:700;margin-bottom:4px}
+.detail__desc{font-size:14.5px;color:var(--muted);line-height:1.5}
+
+.foot{text-align:center;margin-top:48px}
+.quote{font-family:'Fraunces',Georgia,serif;font-style:italic;font-size:clamp(19px,3.4vw,24px);line-height:1.42;font-weight:500;max-width:620px;margin:0 auto;color:#fff}
+.divider{display:block;width:44px;height:2px;background:var(--gold);margin:24px auto;opacity:.75}
+.tag{font-size:14.5px;color:var(--muted);max-width:500px;margin:0 auto;line-height:1.55}
+.tag strong{color:var(--accent);font-weight:600}
+
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+@media(max-width:520px){.universe{padding:48px 16px 60px}.detail{flex-direction:column;text-align:center;align-items:center}}
+</style>
+</head>
+<body>
+
+<section class="universe" id="atlas-universe" aria-label="Atlas Universe">
+  <div class="inner">
+
+    <header class="head">
+      <span class="badge">✦ Atlas Universe</span>
+      <h1 class="title">El sistema operativo inteligente de tu empresa</h1>
+      <p class="lead">No es una app de gestoría. Es la capa que ordena todo lo que pasa en un negocio.</p>
+    </header>
+
+    <div class="flow">
+      <span class="pill pill--chaos">Caos</span>
+      <span class="arrow">→</span>
+      <span class="pill pill--atlas">Atlas</span>
+      <span class="arrow">→</span>
+      <span class="pill pill--order">Orden</span>
+    </div>
+
+    <div class="grid" id="grid"></div>
+
+    <div class="detail" id="detail">
+      <div class="detail__icon" id="detailIcon" aria-hidden="true"></div>
+      <div>
+        <div class="detail__title" id="detailTitle"></div>
+        <div class="detail__desc" id="detailDesc"></div>
+      </div>
+    </div>
+
+    <footer class="foot">
+      <p class="quote">"Atlas convierte el caos de una empresa en trabajo organizado, medible y accionable."</p>
+      <span class="divider"></span>
+      <p class="tag">Atlas no es una herramienta. Es la <strong>capa inteligente</strong> que conecta todo lo que pasa en un negocio.</p>
+    </footer>
+
+  </div>
+</section>
+
+<script>
+(function(){
+  var W=[
+    {id:'inbox',n:'Inbox',i:'📥',t:'#0e3a3a',c:'#5dcaa5',s:'Toda la entrada, un solo sitio',d:'Mensajes, emails y WhatsApps. Todo el caos de entrada centralizado y bajo control.'},
+    {id:'cases',n:'Cases',i:'🗂️',t:'#26215c',c:'#afa9ec',s:'De información a acción',d:'Convierte la información dispersa en casos listos para trabajar, con contexto y siguiente paso.'},
+    {id:'docs',n:'Docs',i:'📄',t:'#04342c',c:'#5dcaa5',s:'Documentos siempre a mano',d:'Contratos, DNI, permisos y archivos. Organizados, vinculados y encontrables al instante.'},
+    {id:'facturas',n:'Facturas',i:'🧾',t:'#412402',c:'#ef9f27',s:'Pagos sin sorpresas',d:'Facturas, pagos, proveedores e incidencias. El dinero del negocio, ordenado y trazable.'},
+    {id:'booking',n:'Booking',i:'📅',t:'#4a1b0c',c:'#f0997b',s:'Reservas bajo control',d:'Booking, Airbnb, web directa, check-in, limpieza y huéspedes. Todos los canales, una vista.'},
+    {id:'crm',n:'CRM',i:'👥',t:'#4b1528',c:'#ed93b1',s:'Cada cliente, su historia',d:'Clientes, historial, oportunidades y seguimiento. Relaciones que no se pierden.'},
+    {id:'tasks',n:'Tasks',i:'✅',t:'#173404',c:'#97c459',s:'Quién, qué y cuándo',d:'Tareas, responsables, vencimientos y prioridades. El trabajo siempre claro y asignado.'},
+    {id:'intelligence',n:'Intelligence',i:'💡',t:'#501313',c:'#f09595',s:'Ve lo que se te escapa',d:'Detecta urgencias, faltantes, riesgos y siguientes pasos. La capa que anticipa.'},
+    {id:'dashboard',n:'Dashboard',i:'📊',t:'#2c2c2a',c:'#b4b2a9',s:'Tu negocio de un vistazo',d:'Visión global del negocio. Todo lo que importa, medible y en una sola pantalla.'}
+  ];
+  var grid=document.getElementById('grid'),
+      di=document.getElementById('detailIcon'),
+      dt=document.getElementById('detailTitle'),
+      dd=document.getElementById('detailDesc'),
+      db=document.getElementById('detail'),
+      active='inbox';
+  function render(){
+    grid.innerHTML='';
+    W.forEach(function(w){
+      var on=w.id===active;
+      var b=document.createElement('button');
+      b.className='mod'+(on?' is-active':'');
+      b.setAttribute('aria-label','Atlas '+w.n);
+      b.style.background=on?w.t:'';
+      b.style.borderColor=on?w.c:'';
+      b.innerHTML='<div class="mod__top"><span class="mod__ico" style="background:'+w.t+'">'+w.i+'</span><span class="mod__name" style="color:'+(on?w.c:'')+'">'+w.n+'</span></div><span class="mod__sub">'+w.s+'</span>';
+      b.onmouseenter=function(){if(w.id!==active)select(w.id);};
+      b.onclick=function(){select(w.id);};
+      grid.appendChild(b);
+    });
+  }
+  function select(id){
+    active=id;render();
+    var w=W.filter(function(x){return x.id===id;})[0];
+    di.style.background=w.t;di.textContent=w.i;
+    dt.textContent='Atlas '+w.n;dt.style.color=w.c;
+    dd.textContent=w.d;db.style.borderColor=w.c;
+  }
+  render();select('inbox');
+})();
+</script>
+</body>
+</html>
